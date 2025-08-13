@@ -1,5 +1,5 @@
 :root {
-  --bg: #4e200f;
+  --bg: #541d07;
   --ink: #f4f1ed;
   --paper: #ffffff;
   --ink-dark: #000000;
@@ -106,9 +106,9 @@ body {
 }
 .snake-overlay svg path {
   stroke: #ffffff;
-  stroke-width: 90;
+  stroke-width: 130;
   fill: none;
-  stroke-linecap: round;
+  stroke-linecap: square;
   stroke-linejoin: round;
   shape-rendering: geometricPrecision;
   vector-effect: non-scaling-stroke;
@@ -118,7 +118,9 @@ body {
 .sections {
   position: relative;
   z-index: 2;
-  padding: 0 5% 30vh 5%;
+  padding: 30vh 5% 30vh 5%;
+  margin-top: -70vh;
+  padding-top: 50px;
 }
 .section {
   min-height: 150px;
@@ -241,21 +243,21 @@ body {
 
 /* Mobile */
 @media (max-width: 900px) {
-  /* Hide snake animation on mobile */
   .snake-overlay {
     display: none !important;
   }
 
-  /* Remove sticky positioning on mobile */
   .sticky-stage {
     position: relative;
     height: auto;
     display: none;
   }
 
-  /* Adjust sections for vertical stacking */
   .sections {
+    position: relative;
+    z-index: 2;
     padding: 80px 5% 80px 5%;
+    margin-top: 0;
   }
 
   .section {
@@ -264,7 +266,6 @@ body {
     padding: 40px 0;
   }
 
-  /* Mobile animations - same as hero section */
   .copy-card {
     width: 90%;
     max-width: 400px;
@@ -272,12 +273,13 @@ body {
     text-align: center;
     justify-self: center;
     opacity: 0;
-    transform: translateY(50px);
-    animation: none;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
   }
 
   .copy-card.is-in {
-    animation: fadeInUp 1s ease-out forwards;
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .copy-card--left,
@@ -294,6 +296,33 @@ body {
   .hero__content,
   .outro__content {
     padding: 0 20px;
+  }
+
+  .hero {
+    display: grid !important;
+    place-items: center !important;
+    position: relative !important;
+    z-index: 999 !important;
+    background: var(--paper) !important;
+    height: 100vh !important;
+    height: 100svh !important;
+  }
+
+  .hero__content {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    animation: none !important;
+    display: block !important;
+    visibility: visible !important;
+    position: relative !important;
+    z-index: 1000 !important;
+  }
+
+  .hero__title,
+  .hero__subtitle {
+    opacity: 1 !important;
+    color: var(--ink-dark) !important;
+    display: block !important;
   }
 
   .heading {

@@ -7,7 +7,6 @@ const prefersReduced = window.matchMedia(
 
 // ---- Snake animation ----
 if (!prefersReduced) {
-  // Catmull–Rom to cubic Bezier
   function toCubicPath(pts, tension = 0) {
     if (!pts || pts.length < 2) return "";
     const s = (1 - tension) / 6;
@@ -26,7 +25,6 @@ if (!prefersReduced) {
     return d;
   }
 
-  // Bounds cache
   let sectionTop = 0;
   let sectionBottom = 0;
 
@@ -49,17 +47,27 @@ if (!prefersReduced) {
   }
 
   function buildSnake(offsetY) {
-    const VIEW_H = 800;
-    const POINTS = 32;
+    const VIEW_H = 2400;
+    const POINTS = 80;
     const step = VIEW_H / POINTS;
-    const freq = 0.01;
-    const amp = Math.min(offsetY * 0.044, 18);
+    const freq = 0.008;
+    const amp = Math.min(offsetY * 0.12, 60);
     const phase = offsetY * 0.002;
+
+    const baseCurve = 60;
+    const basePhase = 0;
 
     const pts = [];
     for (let i = 0; i <= POINTS; i++) {
       const y = i * step;
-      const x = 50 + amp * Math.sin(freq * y + phase);
+
+      const initialCurve = Math.max(0, 1 - i / 20) * -40;
+
+      const x =
+        50 +
+        baseCurve * Math.sin(freq * y + basePhase) +
+        amp * Math.sin(freq * y + phase) +
+        initialCurve;
       pts.push({ x, y });
     }
     return toCubicPath(pts, 0);
@@ -101,7 +109,6 @@ if (!prefersReduced) {
   window.addEventListener("scroll", onScroll, { passive: true });
 }
 
-// ---- Text reveals ----
 document.addEventListener("DOMContentLoaded", () => {
   const outro = document.querySelector(".outro__content");
   const isMobile = window.matchMedia("(max-width: 900px)").matches;
@@ -131,13 +138,11 @@ document.addEventListener("DOMContentLoaded", () => {
     { threshold: 0.1 }
   );
 
-  // Remove all is-in classes on mobile to ensure animation starts fresh
   if (isMobile) {
     document.querySelectorAll(".copy-card").forEach((card) => {
       card.classList.remove("is-in");
     });
   } else {
-    // Desktop - show first card immediately
     const firstCard = document.querySelector("#section-approach .copy-card");
     if (firstCard) firstCard.classList.add("is-in");
   }
