@@ -99,9 +99,7 @@ body {
   opacity: 1;
   transition: opacity 0.4s ease-in-out;
 }
-.snake-overlay--on {
-  opacity: 1;
-}
+
 .snake-overlay svg {
   width: 100%;
   height: 100%;
@@ -120,7 +118,7 @@ body {
 .sections {
   position: relative;
   z-index: 2;
-  padding: 100vh 5% 100vh 5%;
+  padding: 0 5% 30vh 5%;
 }
 .section {
   min-height: 200px;
@@ -133,10 +131,17 @@ body {
 .copy-card {
   width: min(368px, 90%);
   color: var(--ink);
-  opacity: 0;
-  transform: translateY(50px);
   transition: opacity var(--anim), transform var(--anim);
 }
+
+/* Desktop - cards visible by default */
+@media (min-width: 901px) {
+  .copy-card {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .copy-card--left {
   justify-self: start;
   margin-right: 55%;
@@ -236,23 +241,69 @@ body {
 
 /* Mobile */
 @media (max-width: 900px) {
+  /* Hide snake animation on mobile */
+  .snake-overlay {
+    display: none !important;
+  }
+
+  /* Remove sticky positioning on mobile */
+  .sticky-stage {
+    position: relative;
+    height: auto;
+    display: none;
+  }
+
+  /* Adjust sections for vertical stacking */
+  .sections {
+    padding: 80px 5% 80px 5%;
+  }
+
+  .section {
+    min-height: auto;
+    margin-bottom: 60px;
+    padding: 40px 0;
+  }
+
+  /* Mobile animations - same as hero section */
+  .copy-card {
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    justify-self: center;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: none;
+  }
+
+  .copy-card.is-in {
+    animation: fadeInUp 1s ease-out forwards;
+  }
+
   .copy-card--left,
-  .copy-card--right {
-    width: 80%;
+  .copy-card--right,
+  .copy-card--bottom {
+    position: static;
+    width: 90%;
+    max-width: 400px;
     margin: 0 auto;
     text-align: center;
     justify-self: center;
   }
-  .copy-card--bottom {
-    left: 10%;
-    width: 80%;
-  }
-  .snake-overlay svg path {
-    stroke-width: 20;
-  }
+
   .hero__content,
   .outro__content {
     padding: 0 20px;
+  }
+
+  .heading {
+    font-size: clamp(1.3rem, 4vw, 32px);
+    margin-bottom: 15px;
+  }
+
+  .copy {
+    font-size: clamp(0.9rem, 2vw, 18px);
+    line-height: 1.5;
   }
 }
 

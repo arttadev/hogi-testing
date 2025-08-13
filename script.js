@@ -75,12 +75,11 @@ if (!prefersReduced) {
     if (isOn) {
       if (!snakeActive) {
         snakeActive = true;
-        snakeOverlay.classList.add("snake-overlay--on");
+
         snakePath.setAttribute("d", buildSnake(localScroll()));
       }
     } else if (snakeActive) {
       snakeActive = false;
-      snakeOverlay.classList.remove("snake-overlay--on");
     }
   }
 
@@ -105,15 +104,22 @@ if (!prefersReduced) {
 // ---- Text reveals ----
 document.addEventListener("DOMContentLoaded", () => {
   const outro = document.querySelector(".outro__content");
+  const isMobile = window.matchMedia("(max-width: 900px)").matches;
 
+  // Observer for sections
   const sectionObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         const card = entry.target.querySelector(".copy-card");
-        if (entry.isIntersecting && card) card.classList.add("is-in");
+        if (entry.isIntersecting && card && !card.classList.contains("is-in")) {
+          card.classList.add("is-in");
+        }
       });
     },
-    { threshold: 0.12 }
+    {
+      threshold: 0.1,
+      rootMargin: "0px",
+    }
   );
 
   const outroObserver = new IntersectionObserver(
@@ -125,8 +131,16 @@ document.addEventListener("DOMContentLoaded", () => {
     { threshold: 0.1 }
   );
 
-  const firstCard = document.querySelector("#section-approach .copy-card");
-  if (firstCard) firstCard.classList.add("is-in");
+  // Remove all is-in classes on mobile to ensure animation starts fresh
+  if (isMobile) {
+    document.querySelectorAll(".copy-card").forEach((card) => {
+      card.classList.remove("is-in");
+    });
+  } else {
+    // Desktop - show first card immediately
+    const firstCard = document.querySelector("#section-approach .copy-card");
+    if (firstCard) firstCard.classList.add("is-in");
+  }
 
   document
     .querySelectorAll(".section")
