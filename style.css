@@ -106,7 +106,7 @@ body {
 }
 .snake-overlay svg path {
   stroke: #ffffff;
-  stroke-width: 60;
+  stroke-width: 90;
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -121,8 +121,8 @@ body {
   padding: 0 5% 30vh 5%;
 }
 .section {
-  min-height: 200px;
-  margin-bottom: 200px;
+  min-height: 150px;
+  margin-bottom: 150px;
   display: grid;
   place-items: center;
   position: relative;
