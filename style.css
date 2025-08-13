@@ -120,11 +120,11 @@ body {
 .sections {
   position: relative;
   z-index: 2;
-  padding: 0 5%;
+  padding: 100vh 5% 100vh 5%;
 }
 .section {
-  min-height: 100vh;
-  min-height: 100svh;
+  min-height: 200px;
+  margin-bottom: 200px;
   display: grid;
   place-items: center;
   position: relative;

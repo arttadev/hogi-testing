@@ -49,12 +49,12 @@ if (!prefersReduced) {
   }
 
   function buildSnake(offsetY) {
-    const VIEW_H = 600;
+    const VIEW_H = 800;
     const POINTS = 32;
     const step = VIEW_H / POINTS;
     const freq = 0.015;
-    const amp = Math.min(offsetY * 0.04, 20);
-    const phase = offsetY * 0.001;
+    const amp = Math.min(offsetY * 0.044, 20);
+    const phase = offsetY * 0.002;
 
     const pts = [];
     for (let i = 0; i <= POINTS; i++) {
