@@ -52,8 +52,8 @@ if (!prefersReduced) {
     const VIEW_H = 800;
     const POINTS = 32;
     const step = VIEW_H / POINTS;
-    const freq = 0.015;
-    const amp = Math.min(offsetY * 0.044, 20);
+    const freq = 0.01;
+    const amp = Math.min(offsetY * 0.044, 18);
     const phase = offsetY * 0.002;
 
     const pts = [];

@@ -1,5 +1,5 @@
 :root {
-  --bg: #5d352b;
+  --bg: #4e200f;
   --ink: #f4f1ed;
   --paper: #ffffff;
   --ink-dark: #000000;
@@ -96,7 +96,7 @@ body {
   pointer-events: none;
   display: grid;
   place-items: center;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.4s ease-in-out;
 }
 .snake-overlay--on {
